@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Concept Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="conceptMap">
+  <header class="app-header d-flex align-items-center justify-content-between">
+    <div class="app-logo">Research Study</div>
+    <small class="text-muted">Concept Map</small>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-9 col-lg-10">
+          <div class="card card-shadow p-4 p-md-5">
+            
+            <nav class="mb-3">
+              <ul class="nav nav-pills learning-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="learning-hub.html">Learning Hub</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="concept-map.html">Concept Map</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="problem-to-solve.html">Problem to Solve</a>
+                </li>
+              </ul>
+            </nav>
+
+            <h1 class="h4 mb-3">Concept Map – “Who is doing the thinking now?”</h1>
+
+            <p class="text-muted">
+              The concept map below summarizes how AI, tools, and classroom practices interact with
+              student thinking. Use the map to trace the relationships between
+              <em>tools</em>, <em>thinking</em>, and <em>learning outcomes</em>.
+            </p>
+
+            <div class="text-center mb-3">
+            
+              <img
+                src="Materials concept_map.png.png"
+                alt="Concept map about 'Who is doing the thinking now?'"
+                class="img-fluid rounded shadow-sm"
+              />
+            </div>
+
+            <p class="small text-muted">
+              Tip: Try following one path from the central question to see how different uses of AI
+              can either assist or replace student thinking.
+            </p>
+
+            <div class="d-flex justify-content-end mt-3">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="window.location.href='problem-to-solve.html'"
+              >
+                Continue to Problem to Solve
+              </button>
+            </div>
+
+            <div class="footer-continue d-flex justify-content-between align-items-center mt-4">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                  <span class="small text-muted">Progress</span>
+                  <span class="small text-muted">~75% complete</span>
+                </div>
+                <div class="progress" aria-label="Progress">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    style="width: 75%"
+                    aria-valuenow="75"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+              </div>
+              <span class="small text-muted ms-3">
+                Next: Apply the ideas in a set of questions.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
