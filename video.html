@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Research Study – Video Explanation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="video">
+  <header class="app-header d-flex align-items-center justify-content-between">
+    <div class="app-logo">Research Study</div>
+    <small class="text-muted">Step 3 of 5</small>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card card-shadow p-4 p-md-5">
+            <h1 class="h4 mb-3">Explanatory Video</h1>
+            <p class="text-muted">
+              Please watch at least part of the video below before continuing. The "Continue"
+              button will become active once you have watched enough of the video.
+            </p>
+
+            <div class="video-wrapper my-3">
+              <video
+                id="explanationVideo"
+                class="w-100"
+                controls
+                aria-label="Research explanation video"
+              >
+                
+                <source src="pre video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <small id="videoProgressLabel" class="text-muted">
+                Watched: 0%
+              </small>
+              <button
+                id="transcriptToggle"
+                class="btn btn-sm btn-outline-secondary"
+                type="button"
+                aria-expanded="false"
+              >
+                Show Transcript
+              </button>
+            </div>
+
+            <div
+              id="transcriptBox"
+              class="transcript-box p-3 small d-none"
+              aria-live="polite"
+            >
+              <strong>Transcript</strong>
+              <p class="mb-1">
+                There is no transcript available for this video.
+              </p>
+              
+            </div>
+
+            <div class="mt-4 d-flex justify-content-end">
+              <button
+                type="button"
+                id="videoContinueBtn"
+                class="btn btn-secondary"
+                disabled
+                aria-disabled="true"
+              >
+                Continue to Survey
+              </button>
+            </div>
+
+            <div class="mt-4">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <span class="small text-muted">Progress</span>
+                <span class="small text-muted">40% complete</span>
+              </div>
+              <div class="progress" aria-label="Progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  style="width: 40%"
+                  aria-valuenow="40"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
