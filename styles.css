@@ -275,3 +275,188 @@ body {
     border-radius: 1rem;
   }
 }
+
+
+/* wide page with responsive constraints */
+.hub-outer {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.hub-inner {
+  max-width: 1200px; /* wider max width for large screens */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hero area */
+.learning-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+/* Gradient, colorful H2 */
+.learning-hero h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.05;
+  background: linear-gradient(90deg, #1652b0 0%, #4fb0f7 45%, #8ee3c0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 18px rgba(30, 95, 179, 0.10);
+}
+
+/* lighter subtitle with a longer divider line */
+.learning-hero h4 {
+  font-size: 1rem;
+  color: rgba(31, 41, 55, 0.65);
+  font-weight: 600;
+  margin: 0;
+  padding-bottom: 0.65rem;
+  position: relative;
+}
+
+/* Extend the straight line under the subtitle to ~90% width */
+.learning-hero h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 10%; /* previously 40% — now 10% for much longer line */
+  bottom: -0.6rem;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(30,95,179,0.12), rgba(30,95,179,0.06));
+  border-radius: 2px;
+}
+
+/* Cards container layout — keep roomy spacing */
+.learning-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .learning-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .learning-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card style & interactivity */
+.learning-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  box-shadow: 0 6px 18px rgba(24, 58, 110, 0.04);
+}
+
+.learning-card:hover,
+.learning-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(24, 58, 110, 0.10);
+}
+
+/* Card content */
+.learning-card .card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.learning-card .card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0f1724;
+}
+
+.learning-card .card-text {
+  font-size: 0.92rem;
+  color: rgba(15, 23, 42, 0.65);
+  margin: 0;
+  flex: 1;
+}
+
+/* footer area for button */
+.learning-card .card-footer {
+  padding: 0.9rem 1.25rem;
+  background: transparent;
+  border-top: 1px solid rgba(15, 23, 42, 0.03);
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.learning-card .icon-circle svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  fill: #ffffff;        /* white icons */
+  stroke: none;
+}
+
+
+.learning-card .icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: inline-grid;
+  place-items: center;
+  background: linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#38bdf8 100%);
+  box-shadow: 0 6px 16px rgba(30,64,175,0.18), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+
+.learning-card .icon-circle svg {
+  margin: 0;
+}
+
+
+
+/* small "View" button */
+.btn-view {
+  min-width: 92px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* ensure full-card clickable link doesn't hide buttons */
+.learning-card a.card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+/* keep footer buttons visible above full-card link */
+.learning-card .card-footer .btn {
+  z-index: 2;
+}
+
+/* small aesthetic helpers */
+.section-note {
+  color: rgba(15, 23, 42, 0.55);
+  font-size: 0.9rem;
+}
+
+
