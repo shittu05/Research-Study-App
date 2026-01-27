@@ -30,14 +30,14 @@ function initHeaderNavigation() {
   if (!header) return;
 
   header.style.cursor = "pointer";
-  header.setAttribute("title", "Back to instructions");
+  header.setAttribute("title", "Back to learning materials");
 
   header.addEventListener("click", (e) => {
     // don't override click
     const tag = e.target.tagName.toLowerCase();
     if (tag === "a" || tag === "button") return;
 
-    window.location.href = "pre-directions.html";
+    window.location.href = "learning-hub.html";
   });
 }
 
