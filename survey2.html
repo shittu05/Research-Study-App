@@ -2,96 +2,219 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Final Survey</title>
+  <title>Final Survey – Learning Experience</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    
+    .scale-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .scale-option {
+      min-width: 2.2rem;
+      padding-inline: 0.5rem;
+      padding-block: 0.3rem;
+      font-size: 0.85rem;
+    }
+    .scale-option.active {
+      pointer-events: none;
+    }
+    .scale-legend {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: rgba(15, 23, 42, 0.7);
+    }
+    @media (max-width: 576px) {
+      .scale-legend {
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+    }
+  </style>
 </head>
-<body data-page="survey">
+
+<body data-page="survey2">
   <header class="app-header d-flex align-items-center justify-content-between">
-    <div class="app-logo">Research Study</div>
-    <small class="text-muted">Final Survey</small>
+    <div class="app-logo">Assessment and Technology</div>
+  
   </header>
 
   <main class="main-wrapper">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-9 col-xl-8">
           <div class="card card-shadow p-4 p-md-5">
-            <h1 class="h4 mb-3">Final Question</h1>
-            <p class="text-muted">
-              Please answer the question below. Your response helps us understand how useful the
-              concept maps are for learning.
+            <h1 class="h4 mb-3">Survey 2 – Learning Experience</h1>
+            <p class="text-muted mb-2">
+              For each statement below, choose a number from <strong>0</strong> to <strong>10</strong>.
             </p>
 
+            <div class="mb-3">
+              <p><strong>0</strong> = Not at all while <strong>10</strong> = 100% yes</p>
+            </div>
+
             <div
-              id="surveyFeedback"
+              id="survey2Feedback"
               class="alert alert-danger d-none"
               role="alert"
               aria-live="polite"
             ></div>
 
-            <div class="mb-2 d-flex justify-content-between align-items-center">
-              <label for="surveyText" class="form-label mb-0">
-                Do you like the concept maps?
-              </label>
-              <span id="charCount" class="char-counter text-muted"></span>
-              <p></p>
-            </div>
-
-            <textarea
-              id="surveyText"
-              class="form-control textarea-large"
-              placeholder="Write your response here..."
-              aria-describedby="surveyHelp"
-            ></textarea>
-            <small id="surveyHelp" class="form-text text-muted">
-              You can write as much as you like, but please write at least 10 characters. Your
-              response is auto-saved every 15 seconds.
-            </small>
+            <div id="surveyQuestions"></div>
 
             <div class="mt-4 d-flex justify-content-end">
-              <button type="button" class="btn btn-primary" id="surveySubmit">
-                Finish
+              <button type="button" class="btn btn-primary" id="survey2Submit">
+                Submit
               </button>
-            </div>
-
-            <div class="mt-4">
-              <div class="d-flex align-items-center justify-content-between mb-1">
-                <span class="small text-muted">Progress</span>
-                <span class="small text-muted">100% complete</span>
-              </div>
-              <div class="progress" aria-label="Progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  style="width: 100%"
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div
-      id="autosaveToast"
-      class="autosave-toast"
-      role="status"
-      aria-live="polite"
-    >
-      Draft auto-saved
-    </div>
   </main>
 
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Shared app logic (clickable header, progress, etc.) -->
   <script src="app.js" defer></script>
+
+  <!-- Survey 2 logic: 0–10 button scale per question -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const questions = [
+        "The topic covered in the activity was very complex.",
+        "The activity covered theories that I perceived as very complex.",
+        "The activity covered concepts and definitions that I perceived as very complex.",
+        "The instructions and explanations during the activity were very unclear.",
+        "The instructions and explanations were, in terms of learning, very ineffective.",
+        "The instructions and explanations were full of unclear language.",
+        "The activity really enhanced my understanding of the topic covered.",
+        "The activity really enhanced my knowledge and understanding of assessment.",
+        "The activity really enhanced my understanding of the ideas covered.",
+        "The activity really enhanced my understanding of concepts and definitions.",
+        "I tried to relate what I was studying during the activity to what I already knew.",
+        "I tried to connect what I was studying during the activity with my own experiences.",
+        "I tried to make sense out of the different ideas while studying during the activity.",
+        // After this, general questions:
+        "I can direct my own learning progress.",
+        "I am not distracted by other online activities when learning online (instant messages, Internet surfing).",
+        "I repeated the online instructional materials on the basis of my needs."
+      ];
+
+      const container = document.getElementById("surveyQuestions");
+      const feedback = document.getElementById("survey2Feedback");
+      const responses = {}; // store selected values: { q1: 7, q2: 3, ... }
+
+      questions.forEach((text, index) => {
+        const qNumber = index + 1;
+        const qKey = "q" + qNumber;
+
+        // Insert general-feeling intro text before question 14
+        if (qNumber === 14) {
+          const intro = document.createElement("p");
+          intro.className = "text-muted fw-semibold mt-3 mb-2";
+          intro.textContent =
+            "These questions are not about the activity, but about your general feeling when you study anything:";
+          container.appendChild(document.createElement("hr"));
+          container.appendChild(intro);
+        }
+
+        const block = document.createElement("div");
+        block.className = "mb-4";
+
+        const label = document.createElement("label");
+        label.className = "form-label fw-semibold";
+        label.setAttribute("for", qKey);
+        label.textContent = qNumber + ". " + text;
+
+        const scaleRow = document.createElement("div");
+        scaleRow.className = "scale-row mt-1";
+        scaleRow.setAttribute("data-question-key", qKey);
+        scaleRow.setAttribute("role", "radiogroup");
+        scaleRow.setAttribute("aria-label", "Rating for question " + qNumber);
+
+        // Left helper text
+        const helper = document.createElement("span");
+        helper.className = "small text-muted me-2";
+        helper.textContent = "Choose a number:";
+        scaleRow.appendChild(helper);
+
+        // Buttons 0–10
+        for (let value = 0; value <= 10; value++) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "btn btn-outline-primary btn-sm scale-option";
+          btn.textContent = value;
+          btn.setAttribute("data-value", value);
+          btn.setAttribute("aria-pressed", "false");
+
+          btn.addEventListener("click", () => {
+            responses[qKey] = value;
+
+            // Update classes for this row
+            scaleRow
+              .querySelectorAll(".scale-option")
+              .forEach((b) => {
+                b.classList.remove("active", "btn-primary");
+                b.classList.add("btn-outline-primary");
+                b.setAttribute("aria-pressed", "false");
+              });
+
+            btn.classList.add("active", "btn-primary");
+            btn.classList.remove("btn-outline-primary");
+            btn.setAttribute("aria-pressed", "true");
+          });
+
+          scaleRow.appendChild(btn);
+        }
+
+        block.appendChild(label);
+        block.appendChild(scaleRow);
+        container.appendChild(block);
+      });
+
+      // Submit handling
+      document.getElementById("survey2Submit").addEventListener("click", () => {
+        feedback.classList.add("d-none");
+        feedback.textContent = "";
+
+        const totalQuestions = questions.length;
+        const answeredCount = Object.keys(responses).length;
+
+        if (answeredCount < totalQuestions) {
+          feedback.textContent = `Please answer all questions before submitting. You have answered ${answeredCount} of ${totalQuestions}.`;
+          feedback.classList.remove("d-none");
+          return;
+        }
+
+        // Save to localStorage for later export / analysis
+        try {
+          localStorage.setItem("survey2Responses", JSON.stringify(responses));
+        } catch (e) {
+          console.error("Unable to save survey2 responses:", e);
+        }
+
+        feedback.classList.remove("alert-danger");
+        feedback.classList.add("alert-success");
+        feedback.textContent = "Thank you! Your responses have been saved.";
+        feedback.classList.remove("d-none");
+
+        setTimeout(() => {
+          window.location.href = "learning-hub.html";
+        }, 900);
+        
+      });
+    });
+  </script>
 </body>
 </html>
